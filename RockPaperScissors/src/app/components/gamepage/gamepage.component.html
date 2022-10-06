@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-light btn-outline-primary border border-3 border-primary mt-5" style="font-size: 20px; font-weight: 700;" (click)="gameFinished()">Leave Game</button>
+    </div>
+    <!-- Player Decision -->
+    <div class="mt-5 d-flex justify-content-center" *ngIf="choiceNotMade && currPlayerTurn">
+      <button class="border border-white bg-transparent rpsChoice" (click)="madeRPSChoice('rock')"><img width="200px" src="../../../assets/icons/icons8-rock.png" alt="A rock icon"></button>
+      <button class="border border-white bg-transparent rpsChoice" (click)="madeRPSChoice('paper')"><img width="200px" src="../../../assets/icons/icons8-paper.png" alt="A paper icon"></button>
+      <button class="border border-white bg-transparent rpsChoice" (click)="madeRPSChoice('scissors')"><img width="200px" src="../../../assets/icons/icons8-scissors.png" alt="A scissors icon"></button>
+    </div>
+    <!-- Winner's name Revealed -->
+    <div *ngIf="showWinner">
+      <div class="row">
+        <h1 class="d-flex justify-content-center fontStrokeWinner" style="font-size: 70px">-- Winner --</h1>
+        <h2 class="d-flex justify-content-center fontStrokeWinner" style="font-size: 70px">{{overallWinner}}</h2>
+      </div>
+    </div>
+    <!-- Choices Revealed -->
+    <div *ngIf="!choiceNotMade && !showWinner">
+      <div class="d-flex justify-content-center">
+
+        <!-- <div class="d-flex justify-content-center"> -->
+          <!-- Player 1 choice -->
+          <!-- <img [src]="currGame.playerOneChoice">
+
+          <img style="margin-left: 50px;" src = "../../../assets/icons/icons8-vs.png"> -->
+
+          <!-- Player 2 choice -->
+          <!-- <img style="margin-left: 50px;" [src]="currGame.playerTwoChoice">
+        </div> -->
+
+        <button *ngIf="anotherRound" class="btn btn-light btn-outline-primary border border-3 border-primary mt-3" style="font-size: 40px; font-weight: 500;" (click)="nextRound()">Next Round</button>
+      </div>
+    </div>
+    <!-- Prior Round Logs -->
+    <div class="mt-5 row border-top border-3">
+      <h1 class="d-flex justify-content-center fontStrokeResults">Results</h1>
+      <div *ngFor="let round of gameHistory">
+        <div class="d-flex justify-content-center border-top border-3 pt-3 pb-3">
+          <img [src]="round.playerOneChoice">
+          <img style="margin-left: 50px;" height="100px" src = "../../../assets/icons/icons8-vs.png">
+          <img style="margin-left: 50px;" [src]="round.playerTwoChoice">
+        </div>
+        <div class="d-flex justify-content-center">
+          <h3>{{round.winner}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

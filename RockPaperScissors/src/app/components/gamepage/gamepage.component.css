@@ -1,0 +1,22 @@
+.resultsSection {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.rpsChoice {
+  opacity: 100%;
+}
+
+.rpsChoice:hover {
+  opacity: 50%;
+}
+
+.fontStrokeResults {
+  color: gainsboro;
+  -webkit-text-stroke: 1.5px blue;
+}
+
+.fontStrokeWinner {
+  color: gainsboro;
+  -webkit-text-stroke: 2px blue;
+}

@@ -1,0 +1,23 @@
+<div class="container">
+  <div *ngIf="gameNotStarted" class="d-flex justify-content-center" style="padding-top: 100px">
+    <div class="col-5">
+      <h1 class="mb-4 titleFont">Rock Paper Scissors</h1>
+    </div>
+    <div class="col-7 row">
+      <button class="btn btn-light btn-outline-primary border border-3 border-primary" style="font-size: 30px; font-weight: 500;" (click)="playCompGame()">Play Against Computer</button>
+      <button class="btn btn-light btn-outline-primary border border-3 border-primary mt-4" style="font-size: 30px; font-weight: 500;">Play Against Player</button>
+    </div>
+  </div>
+  <div *ngIf="gameNotStarted">
+    <h1 *ngIf="loading">Looking for a match <span class="dotOne">.</span><span class="dotTwo">.</span><span class="dotThree">.</span></h1>
+    <div class="d-flex justify-content-center" style="margin-top: 200px;">
+      <img width="200px" style="margin-right: 150px;" src="../../../assets/icons/icons8-hand-scissors.png" alt="A hand forming scissors">
+      <img width="200px" style="margin-right: 150px;" src="../../../assets/icons/icons8-vs.png" alt="A versus symbol">
+      <img width="200px" src="../../../assets/icons/icons8-hand-rock.png" alt="A hand forming a rock">
+    </div>
+  </div>
+  <!-- Gameplay Section -->
+  <div *ngIf="!gameNotStarted">
+    <app-gamepage [currGame]="newGame" (endGameEvent)="resetValues($event)"></app-gamepage>
+  </div>
+</div>

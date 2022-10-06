@@ -1,0 +1,26 @@
+.dotOne {
+  font-size: 60px;
+  animation: dotAnimate 1s infinite;
+}
+
+.dotTwo {
+  font-size: 60px;
+  animation: dotAnimate 1s infinite 0.2s;
+}
+
+.dotThree {
+  font-size: 60px;
+  animation: dotAnimate 1s infinite 0.4s;
+}
+
+@keyframes dotAnimate {
+  0% {opacity: 100%}
+  50% {opacity: 0%}
+  100% {opacity: 100%}
+}
+
+.titleFont {
+  font-size: 80px;
+  color: gainsboro;
+  -webkit-text-stroke: 2.5px blue;
+}
