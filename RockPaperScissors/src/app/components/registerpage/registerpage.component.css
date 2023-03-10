@@ -1,0 +1,12 @@
+.formTitle {
+  font-size: 60px;
+  color: gainsboro;
+  -webkit-text-stroke: 2px rgba(0, 0, 255, 0.541);
+}
+
+.formLabel {
+  font-size: 22px;
+  color: gainsboro;
+  -webkit-text-stroke: 1px rgba(0, 0, 255, 0.6);
+  font-weight: 700;
+}

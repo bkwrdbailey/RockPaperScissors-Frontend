@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://localhost:7231/'
+  apiBaseUrl: 'https://rockpaperscissorsms.azurewebsites.net'
+  // apiBaseUrl: 'https://localhost:7231' Locally Ran Microservice URL
 };
 
 /*

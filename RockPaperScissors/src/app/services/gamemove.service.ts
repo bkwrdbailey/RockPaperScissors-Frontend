@@ -12,10 +12,10 @@ export class GamemoveService {
   constructor(private http: HttpClient) { }
 
   updateComputerGameState(currState: GameState) : Observable<GameState> {
-    return this.http.put<GameState>(environment.apiBaseUrl + 'game/computer/nextstate', currState);
+    return this.http.put<GameState>(environment.apiBaseUrl + '/game/computer/nextstate', currState);
   }
 
   updatePlayerGameState(currState: GameState) : Observable<GameState> {
-    return this.http.put<GameState>(environment.apiBaseUrl + 'game/nextstate', currState);
+    return this.http.put<GameState>(environment.apiBaseUrl + '/game/nextstate', currState);
   }
 }

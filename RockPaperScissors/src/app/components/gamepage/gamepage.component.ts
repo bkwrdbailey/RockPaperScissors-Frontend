@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GameState } from 'src/app/models/GameState';
 import { User } from 'src/app/models/User';
 import { GamemoveService } from 'src/app/services/gamemove.service';
+import { SessionmanagmentService } from 'src/app/services/sessionmanagment.service';
+import { UserhandlingService } from 'src/app/services/userhandling.service';
 
 @Component({
   selector: 'app-gamepage',
@@ -10,14 +12,14 @@ import { GamemoveService } from 'src/app/services/gamemove.service';
 })
 export class GamepageComponent implements OnInit {
 
-  constructor(private gamemoveService: GamemoveService) { }
+  constructor(private gamemoveService: GamemoveService, private sessionService: SessionmanagmentService, private userData: UserhandlingService) { }
 
   @Input()
   currGame: GameState = {playerOne: '', playerTwo: '', rounds: 0, winner: '', playerOneChoice: '', playerTwoChoice: ''}
 
   @Output() endGameEvent = new EventEmitter<GameState>();
 
-  currUser: User = {username: 'bobbyRPSPRO', password: ''};
+  currUser: User = {username: '', password: ''};
 
   gameHistory!: GameState[];
 
@@ -41,18 +43,34 @@ export class GamepageComponent implements OnInit {
 
   ngOnInit() {
     this.gameHistory = [];
+
+    if (this.userData.getUsername() == ' ') {
+      this.currUser.username = 'guest';
+    } else {
+      this.currUser.username = this.userData.getUsername();
+    }
+
+    console.log(this.currUser.username);
+    console.log(this.currGame.playerOne);
+
     if (this.currGame.playerOne == this.currUser.username) {
       this.currPlayerTurn = true;
+      this.choiceNotMade = true;
     }
+
     this.roundCounter = 1;
     this.playerOneWins = 0;
     this.playerTwoWins = 0;
   }
 
+  /* Player Vs. Computer Gameplay Logic */
+  // Everytime the current user clicks an option the computer's turn is then played out in the backend and retrieved to see who won that round
   madeRPSChoice(choice: string) {
     this.currPlayerTurn = false;
     this.choiceNotMade = false;
     this.currGame.playerOneChoice = choice;
+
+
 
     this.gamemoveService.updateComputerGameState(this.currGame).subscribe(res => {
       this.currGame = res;
@@ -113,11 +131,13 @@ export class GamepageComponent implements OnInit {
     })
   }
 
+  // Resetting boolean values for current user on next round start
   nextRound() {
     this.anotherRound = false;
     this.choiceNotMade = true;
   }
 
+  // Cleaning up data passed in from Input Directive before sending it back via the Output event emitter
   gameFinished() {
     this.currGame.playerOne = '';
     this.currGame.playerTwo = '';

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameState } from 'src/app/models/GameState';
 import { User } from 'src/app/models/User';
+import { UserhandlingService } from 'src/app/services/userhandling.service';
 
 @Component({
   selector: 'app-landingpage',
@@ -9,21 +10,29 @@ import { User } from 'src/app/models/User';
 })
 export class LandingpageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userData: UserhandlingService) { }
 
   gameNotStarted: boolean = true;
   loading: boolean = false;
 
-  currUser: User = {username: '', password: ''}
+  currUsername: string = '';
 
   newGame: GameState = {playerOne: '', playerTwo: '', rounds: 0, winner: '', playerOneChoice: '', playerTwoChoice: ''}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.currUsername = this.userData.getUsername();
   }
 
   playCompGame() {
-    this.newGame.playerOne = 'bobbyRPSPRO';
-    this.newGame.playerTwo = 'RPSxTerminator';
+    if(this.currUsername != ' ')
+    {
+      this.newGame.playerOne = this.currUsername;
+    }
+    else
+    {
+      this.newGame.playerOne = 'guest';
+    }
+    this.newGame.playerTwo = 'rpsxterminator';
     this.newGame.rounds = 3;
     this.gameNotStarted = false;
   }
